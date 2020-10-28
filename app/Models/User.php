@@ -58,4 +58,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function todolist()
+    {
+        return $this->hasMany(todolist::class, 'user-id');
+    }
 }

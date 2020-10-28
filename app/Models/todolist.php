@@ -12,4 +12,8 @@ class todolist extends Model
         'user-id',
         'todolistname',
     ];
+    public function todolis()
+    {
+        return $this->hasMany(task::class);
+    }
 }
