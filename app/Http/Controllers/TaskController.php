@@ -125,4 +125,11 @@ class TaskController extends Controller
             return $this->session()->flash('status', 'Error');
         return response()->json(null);
     }
+
+    public function markdone($id)
+    {
+        $id = task::findOrFail($id);
+        if ($id)
+            $id->update(['completed' => true]);
+    }
 }
