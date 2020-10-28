@@ -33,6 +33,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return todolist::find($id);
 // });
 
-
 Route::resource('tasks', TaskController::class);
 Route::resource('todolist', TolistController::class);

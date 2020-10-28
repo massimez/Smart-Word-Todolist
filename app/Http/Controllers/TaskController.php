@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\task;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -14,9 +15,14 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = task::all();
-        return $tasks;
-        return view('todo.index');
+
+        $result = QueryBuilder::for(task::class)
+            ->allowedFilters('todolist-id', 'taskname', 'completed', 'priotiy')
+            //->defaultSort('-id')
+            ->allowedSorts('todolist-id', 'taskname', 'completed', 'priotiy')
+
+            ->get();
+        return $result;
     }
 
     /**
@@ -100,8 +106,8 @@ class TaskController extends Controller
         $article = task::findOrFail($id);
         $article->update($request->all());
 
-        // return $article;
-        return redirect()->back()->with('message', 'Updated!');
+        return $article;
+        //return redirect()->back()->with('message', 'Updated!');
     }
 
     /**

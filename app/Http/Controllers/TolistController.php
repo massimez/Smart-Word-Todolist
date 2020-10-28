@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\todolist;
 use Illuminate\Http\Request;
 
 class TolistController extends Controller
@@ -13,7 +14,8 @@ class TolistController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = todolist::paginate(10);
+        return $tasks;
     }
 
     /**
@@ -34,7 +36,23 @@ class TolistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //santitizing
+        $this->validate($request, [
+            'todolistname' => 'required|string|max:255|min:3',
+        ]);
+        //Create a new task
+        $todolist = new todolist;
+        //Assign the task data from the request
+        $todolist->taskname = $request->taskname;
+
+        $todolist->description = $request->description;
+        $todolist->duedate = $request->duedate;
+
+        //Sava the task
+        $todolist->save();
+        //Flash with succes
+        $request->session()->flash('status', 'Todolist was successful!');
+        //Return a Redirect
     }
 
     /**
@@ -45,7 +63,7 @@ class TolistController extends Controller
      */
     public function show($id)
     {
-        //
+        return todolist::find($id);
     }
 
     /**
@@ -68,7 +86,14 @@ class TolistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'todolistname' => 'string|max:255|min:3',
+        ]);
+        $id = todolist::findOrFail($id);
+        $id->update(['todolistname' => $request->name]);
+
+        return $id;
+        //return redirect()->back()->with('message', 'Updated!');
     }
 
     /**
@@ -79,6 +104,11 @@ class TolistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = todolist::findOrFail($id);
+        if ($id)
+            $id->delete();
+        else
+            return $this->session()->flash('status', 'Error');
+        return response()->json(null);
     }
 }
