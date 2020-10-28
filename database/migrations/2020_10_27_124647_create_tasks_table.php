@@ -15,12 +15,12 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('todolist-id')->nullable();
-            $table->text('name');
+            $table->unsignedBigInteger('todolist-id')->nullable()->default(1);
+            $table->text('taskname');
             $table->text('description');
-            $table->date('due-date');
-            $table->integer('priority');
-            $table->boolean('completed');
+            $table->date('duedate');
+            $table->integer('priority')->default(1);
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

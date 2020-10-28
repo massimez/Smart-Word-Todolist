@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class task extends Model
 {
     use HasFactory;
+    protected $table = 'tasks';
+    protected $fillable = [
+        'todolist-id',
+        'taskname',
+        'description',
+        'duedate',
+        'priority',
+        'completed',
+    ];
 }

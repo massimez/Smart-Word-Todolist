@@ -15,7 +15,7 @@ class CreateTodolistsTable extends Migration
     {
         Schema::create('todolists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user-id')->nullable();
+            $table->unsignedBigInteger('user-id')->nullable()->default(1);
             $table->text('todolistname');
             $table->timestamps();
         });
