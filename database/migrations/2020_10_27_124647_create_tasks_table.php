@@ -22,6 +22,7 @@ class CreateTasksTable extends Migration
             $table->integer('priority')->default(1);
             $table->boolean('completed')->default(false);
             $table->timestamps();
+            $table->foreign('todolist-id')->references('id')->on('todolist');
         });
     }
 
