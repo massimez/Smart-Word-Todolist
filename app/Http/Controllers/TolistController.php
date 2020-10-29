@@ -14,8 +14,8 @@ class TolistController extends Controller
      */
     public function index()
     {
-        $tasks = todolist::paginate(10);
-        return $tasks;
+        $todolist = todolist::all();
+        return $todolist;
     }
 
     /**
@@ -43,10 +43,7 @@ class TolistController extends Controller
         //Create a new task
         $todolist = new todolist;
         //Assign the task data from the request
-        $todolist->taskname = $request->taskname;
-
-        $todolist->description = $request->description;
-        $todolist->duedate = $request->duedate;
+        $todolist->todolistname = $request->todolistname;
 
         //Sava the task
         $todolist->save();

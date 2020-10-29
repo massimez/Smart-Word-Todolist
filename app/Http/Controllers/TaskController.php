@@ -38,6 +38,7 @@ class TaskController extends Controller
             'taskname' => 'required|string|max:255|min:3',
             'description' => 'required|string|max:10000|min:5',
             'duedate' => 'required|date',
+            'priority' => 'numeric',
         ]);
         //Create a new task
         $task = new Task;
@@ -46,11 +47,12 @@ class TaskController extends Controller
 
         $task->description = $request->description;
         $task->duedate = $request->duedate;
+        $task->priority = $request->priority;
 
         //Sava the task
         $task->save();
         //Flash with succes
-        $request->session()->flash('status', 'Task was successful!');
+        $request->session()->flash('status', 'Successful!');
         //Return a Redirect
     }
 

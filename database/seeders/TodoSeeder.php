@@ -21,6 +21,7 @@ class TodoSeeder extends Seeder
         for ($i = 1; $i <= 3; $i++) {
             DB::table('todolists')->insert([
                 'todolistname' => Str::random(10),
+                'user-id' => rand(1, 2),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
