@@ -3,24 +3,33 @@
 
 ## TODOLIST API
 
-#### To get tasks 
-* /api/tasks
-#### To get specific task
-* localhost/api/tasks/{id}
-#### To get todolist 
-* /api/tasks
-#### To get specific task
-* /api/tasks/{id}
-#### To make a task done
-* /api/tasks/markdone/{id} 
-#### To update 
-* PUT/PATCH api/tasks/{id}
-#### To delete
-* DELETE /api/tasks/{id}
-#### To insert 
-* POST /api/tasks
+#### Список списков
+REQUEST 
+TYPE :GET 
+* /api/todolist
+Response: 
 
-**The same thing with todolist,it need just to remplace tasks with todolist**
+#### Сущность списка дел 
+REQUEST 
+TYPE :GET 
+* localhost/api/todolist/{id}
+#### Пометить дело как сделанное
+REQUEST 
+TYPE :PUT 
+* /api/tasks/markdone/{id} 
+#### Изменить список
+REQUEST 
+TYPE : PUT OR PATCH
+* PUT/PATCH api/todolist/{id}
+#### Удалить список
+REQUEST 
+TYPE :DELETE
+* DELETE /api/tasks/{id}
+#### Добавить список
+REQUEST 
+TYPE :POST
+* /api/tasks
+
 **Filtring and sorting with adding ?filter ?sort to the url**
 
 
