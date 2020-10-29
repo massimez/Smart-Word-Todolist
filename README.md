@@ -53,54 +53,54 @@ TYPE :GET
 * /api/tasks
  
 Response: list {  
-        id: number, 
-        todolist-id: number, 
-        taskname: text, 
-        description: text, 
-        duedate: date, 
-        priority: number from 1 to 5, 
+        id: number,  
+        todolist-id: number,  
+        taskname: text,  
+        description: text,  
+        duedate: date,  
+        priority: number from 1 to 5,  
         completed: boolean, 
-        created_at: date,
-        updated_at: date  
-}  
+        created_at: date,  
+        updated_at: date   
+}   
 
-#### Сущность списка дел  
-REQUEST  
+#### Сущность списка дел   
+REQUEST    
 TYPE :GET  
 * localhost/api/tasks/{id}  
 Response: {  
-       id: number, 
-        todolist-id: number, 
-        taskname: text, 
-        description: text, 
-        duedate: date, 
-        priority: number from 1 to 5, 
-        completed: boolean, 
-        created_at: date,
-        updated_at: date  
-}  
-#### Изменить список  
+       id: number,   
+        todolist-id: number,   
+        taskname: text,    
+        description: text,   
+        duedate: date,   
+        priority: number from 1 to 5,  
+        completed: boolean,   
+        created_at: date,  
+        updated_at: date    
+}    
+#### Изменить список    
 
-REQUEST  
+REQUEST    
 TYPE : PUT OR PATCH  
 * PUT/PATCH api/tasks/{id}  
 
 Response:flash session Updated  
   
-#### Удалить дело  
-REQUEST  
+#### Удалить дело   
+REQUEST    
 TYPE :DELETE  
 * DELETE /api/tasks/{id} 
  
 Response: flash session Deleted 
-#### Добавить  дело
+#### Добавить  дело  
 Required: 'taskname','description' ,'duedate' ,'priority'
-REQUEST  
+REQUEST    
 TYPE :POST 
 * /api/tasks  
 Response : Successful
-#### Пометить дело как сделанное  
-REQUEST  
+#### Пометить дело как сделанное    
+REQUEST    
 TYPE : PUT  
 * /api/tasks/markdone/{id}  
 
