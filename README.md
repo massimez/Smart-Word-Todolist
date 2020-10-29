@@ -7,20 +7,34 @@
 REQUEST 
 TYPE :GET 
 * /api/todolist
-Response: 
+
+Response: {
+        user-id : number
+        todolistname: string
+        created-at
+        updated-at:
+}
 
 #### Сущность списка дел 
 REQUEST 
 TYPE :GET 
 * localhost/api/todolist/{id}
+Response: {
+        user-id : number
+        todolistname: string
+        created-at
+        updated-at:
+}
 #### Пометить дело как сделанное
 REQUEST 
 TYPE :PUT 
 * /api/tasks/markdone/{id} 
+Response: flash session 
 #### Изменить список
 REQUEST 
 TYPE : PUT OR PATCH
 * PUT/PATCH api/todolist/{id}
+
 #### Удалить список
 REQUEST 
 TYPE :DELETE
