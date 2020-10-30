@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\task;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -16,11 +17,20 @@ class TaskController extends Controller
     public function index()
     {
 
-        $result = QueryBuilder::for(task::class)
-            ->allowedFilters('todolist-id', 'taskname', 'completed', 'priotiy')
-            //->defaultSort('-id')
-            ->allowedSorts('todolist-id', 'taskname', 'completed', 'priotiy')
+        // $result = QueryBuilder::for(task::class)
+        //     ->allowedFilters('todolist-id', 'taskname', 'completed', 'priotiy')
+        //     //->defaultSort('-id')
+        //     ->allowedSorts('todolist-id', 'taskname', 'completed', 'priotiy')
 
+        //     ->get();
+
+        $result = QueryBuilder::for(task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('todolist-id'),
+                AllowedFilter::exact('id'),
+                AllowedFilter::exact('completed'),
+                AllowedFilter::exact('priority'),
+            ])
             ->get();
         return $result;
     }
@@ -64,6 +74,26 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'taskname' => 'required|string|max:255|min:3',
+            'description' => 'required|string|max:10000|min:5',
+            'duedate' => 'required|date',
+            'priority' => 'numeric',
+        ]);
+        //Create a new task
+        $task = new Task;
+        //Assign the task data from the request
+        $task->taskname = $request->taskname;
+
+        $task->description = $request->description;
+        $task->duedate = $request->duedate;
+        $task->priority = $request->priority;
+
+        //Sava the task
+        $task->save();
+        //Flash with succes
+        $request->session()->flash('status', 'Successful!');
+        //Return a Redirect
         //return task::create($request->all());
     }
 
