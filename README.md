@@ -6,8 +6,9 @@
 #### Список списков 
 REQUEST  
 TYPE :GET  
-* /api/todolist 
- 
+```
+/api/todolist 
+```
 Response: { 
         user-id : number 
         todolistname: string 
@@ -18,7 +19,9 @@ Response: {
 #### Сущность списка дел  
 REQUEST  
 TYPE :GET  
+```
 * localhost/api/todolist/{id}  
+```
 Response: {  
         user-id : number  
         todolistname: string  
@@ -29,29 +32,33 @@ Response: {
 Изменять можно только имя списка (name)  
 REQUEST  
 TYPE : PUT OR PATCH  
+```
 * PUT/PATCH api/todolist/{id}  
-
+```
 Response:flash session Updated  
   
 #### Удалить список  
 REQUEST  
 TYPE :DELETE  
+```
 * DELETE /api/tasks/{id} 
- 
+ ```
 Response: flash session Deleted 
 #### Добавить список 
 Required: todolistname,user-id 
 REQUEST  
 TYPE :POST 
+```
 * /api/todolist  
-
+```
 **Filtring and sorting with adding to the url ?filter[name]=John ?sort=id 
 
 #### Список дел
 REQUEST  
 TYPE :GET  
+```
 * /api/tasks
- 
+ ```
 Response: list {  
         id: number,  
         todolist-id: number,  
@@ -83,26 +90,31 @@ Response: {
 
 REQUEST    
 TYPE : PUT OR PATCH  
+```
 * PUT/PATCH api/tasks/{id}  
-
+```
 Response:flash session Updated  
   
 #### Удалить дело   
 REQUEST    
 TYPE :DELETE  
+```
 * DELETE /api/tasks/{id} 
- 
+ ```
 Response: flash session Deleted 
 #### Добавить  дело  
 Required: 'taskname','description' ,'duedate' ,'priority'
 REQUEST    
 TYPE :POST 
+```
 * /api/tasks  
+```
 Response : Successful
 #### Пометить дело как сделанное    
 REQUEST    
 TYPE : PUT  
+```
 * /api/tasks/markdone/{id}  
-
+```
 Response: flash session  
 **Filtring and sorting with adding to the url ?filter[name]=John ?sort=id 
