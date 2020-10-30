@@ -18,7 +18,7 @@ class TodoSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             DB::table('todolists')->insert([
                 'todolistname' => Str::random(10),
                 'user-id' => rand(1, 2),

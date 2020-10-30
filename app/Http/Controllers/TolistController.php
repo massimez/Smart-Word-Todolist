@@ -37,8 +37,9 @@ class TolistController extends Controller
         //Sava the task
         $todolist->save();
         //Flash with succes
-        $request->session()->flash('status', 'Todolist was successful!');
+        // $request->session()->flash('status', 'Todolist was successful!');
         //Return a Redirect
+        return response()->json($todolist, 201);
     }
 
     /**
@@ -63,6 +64,7 @@ class TolistController extends Controller
         //Flash with succes
         $request->session()->flash('status', 'Todolist was successful!');
         //Return a Redirect
+        return response()->json($todolist, 201);
     }
 
     /**
@@ -102,7 +104,7 @@ class TolistController extends Controller
         $id = todolist::findOrFail($id);
         $id->update(['todolistname' => $request->name]);
 
-        return $id;
+        return response()->json($id, 201);
         //return redirect()->back()->with('message', 'Updated!');
     }
 

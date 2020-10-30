@@ -17,12 +17,13 @@ class Taskseeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             DB::table('tasks')->insert([
                 'taskname' => Str::random(10),
-                'description' => Str::random(10) . 'blablabla',
+                'description' => Str::random(50) . '   ',
                 'duedate' => Carbon::tomorrow(),
                 'priority' => rand(1, 5),
+                'todolist-id' => rand(1, 5),
                 'completed' => (bool)rand(0, 1),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
