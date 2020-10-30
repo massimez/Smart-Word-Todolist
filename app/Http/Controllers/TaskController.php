@@ -40,9 +40,20 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         //
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         //santitizing
         $this->validate($request, [
             'taskname' => 'required|string|max:255|min:3',
@@ -63,40 +74,8 @@ class TaskController extends Controller
         //Sava the task
         $task->save();
         //Flash with succes
-        $request->session()->flash('status', 'Successful!');
+        //$request->session()->flash('status', 'Successful!');
         //Return a Redirect
-        return response()->json($task, 201);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'taskname' => 'required|string|max:255|min:3',
-            'description' => 'required|string|max:10000|min:5',
-            'duedate' => 'required|date',
-            'priority' => 'numeric',
-        ]);
-        //Create a new task
-        $task = new Task;
-        //Assign the task data from the request
-        $task->taskname = $request->taskname;
-
-        $task->description = $request->description;
-        $task->duedate = $request->duedate;
-        $task->priority = $request->priority;
-
-        //Sava the task
-        $task->save();
-        //Flash with succes
-        $request->session()->flash('status', 'Successful!');
-        //Return a Redirect
-        //return task::create($request->all());
         return response()->json($task, 201);
     }
 

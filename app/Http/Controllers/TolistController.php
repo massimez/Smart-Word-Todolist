@@ -23,23 +23,8 @@ class TolistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        ////santitizing
-        $this->validate($request, [
-            'todolistname' => 'required|string|max:255|min:3',
-        ]);
-        //Create a new task
-        $todolist = new todolist;
-        //Assign the task data from the request
-        $todolist->todolistname = $request->todolistname;
-
-        //Sava the task
-        $todolist->save();
-        //Flash with succes
-        // $request->session()->flash('status', 'Todolist was successful!');
-        //Return a Redirect
-        return response()->json($todolist, 201);
     }
 
     /**
@@ -62,7 +47,7 @@ class TolistController extends Controller
         //Sava the task
         $todolist->save();
         //Flash with succes
-        $request->session()->flash('status', 'Todolist was successful!');
+        // $request->session()->flash('status', 'Todolist was successful!');
         //Return a Redirect
         return response()->json($todolist, 201);
     }
