@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\todolist;
+use App\Http\Resources\TodolistResource;
 use Illuminate\Http\Request;
+
 
 class TolistController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +20,22 @@ class TolistController extends Controller
      */
     public function index()
     {
-        $todolist = todolist::all();
-        return $todolist;
+        // $array2 = array();
+
+        // foreach ($todolists as $todolist) {
+        //     $toshow1 = $todolist->todolistname;
+        //     //echo "<h1>" . $toshow1 . "</h1>";
+        //     array_push($array, $toshow1);
+        //     foreach ($todolist->tasks as $task) {
+        //         $toshow2 = $task->taskname;
+        //         //echo "<p>" . $toshow2 . "</p>";
+        //         //$arraylist[$toshow1] = $toshow2;
+        //         array_push($array2, $toshow2);
+        //     }
+        //     array_push($array, $array2);
+        // }
+
+        return TodolistResource::collection(todolist::all());
     }
 
     /**
@@ -23,23 +43,8 @@ class TolistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        ////santitizing
-        $this->validate($request, [
-            'todolistname' => 'required|string|max:255|min:3',
-        ]);
-        //Create a new task
-        $todolist = new todolist;
-        //Assign the task data from the request
-        $todolist->todolistname = $request->todolistname;
-
-        //Sava the task
-        $todolist->save();
-        //Flash with succes
-        // $request->session()->flash('status', 'Todolist was successful!');
-        //Return a Redirect
-        return response()->json($todolist, 201);
     }
 
     /**
@@ -54,6 +59,7 @@ class TolistController extends Controller
         $this->validate($request, [
             'todolistname' => 'required|string|max:255|min:3',
         ]);
+
         //Create a new task
         $todolist = new todolist;
         //Assign the task data from the request
@@ -62,7 +68,7 @@ class TolistController extends Controller
         //Sava the task
         $todolist->save();
         //Flash with succes
-        $request->session()->flash('status', 'Todolist was successful!');
+        // $request->session()->flash('status', 'Todolist was successful!');
         //Return a Redirect
         return response()->json($todolist, 201);
     }
@@ -117,10 +123,12 @@ class TolistController extends Controller
     public function destroy($id)
     {
         $id = todolist::findOrFail($id);
-        if ($id)
+        if ($id) {
+
             $id->delete();
-        else
-            return $this->session()->flash('status', 'Error');
-        return response()->json(null);
+        }
+
+
+        return response()->json(null, 204);
     }
 }

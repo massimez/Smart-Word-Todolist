@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,10 +16,10 @@ class CreateTodolistsTable extends Migration
     {
         Schema::create('todolists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user-id')->nullable()->default(1);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('todolistname');
             $table->timestamps();
-            $table->foreign('user-id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

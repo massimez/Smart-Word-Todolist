@@ -60,6 +60,6 @@ class User extends Authenticatable
     ];
     public function todolist()
     {
-        return $this->hasMany(todolist::class, 'user-id');
+        return $this->hasMany(todolist::class,);
     }
 }

@@ -10,11 +10,15 @@ class task extends Model
     use HasFactory;
     protected $table = 'tasks';
     protected $fillable = [
-        'todolist-id',
+        'todolist_id',
         'taskname',
         'description',
         'duedate',
         'priority',
         'completed',
     ];
+    public function todolist()
+    {
+        return $this->belongsTo(Todolist::class, 'todolist_id');
+    }
 }
