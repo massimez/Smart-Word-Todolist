@@ -36,4 +36,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('todolist', TolistController::class);
 
 Route::resource('tasks', TaskController::class);
-Route::put('tasks/markdone/{id}', 'TaskController@markdone');
+Route::put('tasks/markdone/{id}', [TaskController::class, 'markdone']);
