@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\todolist;
-
+use App\Http\Resources\TodolistResource;
 use Illuminate\Http\Request;
+
 
 class TolistController extends Controller
 {
@@ -19,9 +20,22 @@ class TolistController extends Controller
      */
     public function index()
     {
-        $todolists = todolist::all();
+        // $array2 = array();
 
-        return response()->json($todolists, 200);
+        // foreach ($todolists as $todolist) {
+        //     $toshow1 = $todolist->todolistname;
+        //     //echo "<h1>" . $toshow1 . "</h1>";
+        //     array_push($array, $toshow1);
+        //     foreach ($todolist->tasks as $task) {
+        //         $toshow2 = $task->taskname;
+        //         //echo "<p>" . $toshow2 . "</p>";
+        //         //$arraylist[$toshow1] = $toshow2;
+        //         array_push($array2, $toshow2);
+        //     }
+        //     array_push($array, $array2);
+        // }
+
+        return TodolistResource::collection(todolist::all());
     }
 
     /**

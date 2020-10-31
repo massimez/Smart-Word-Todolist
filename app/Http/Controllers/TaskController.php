@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\task;
+use App\Models\Task;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
@@ -24,7 +24,7 @@ class TaskController extends Controller
 
         //     ->get();
 
-        $result = QueryBuilder::for(task::class)
+        $result = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('todolist_id'),
                 AllowedFilter::exact('id'),
@@ -100,7 +100,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $todo = task::find($id);
+        $todo = Task::find($id);
         return $todo;
     }
 
@@ -111,7 +111,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, task $id)
+    public function update(Request $request, Task $id)
     {
         $this->validate($request, [
             'taskname' => 'string|max:255|min:3',
@@ -146,6 +146,7 @@ class TaskController extends Controller
     public function markdone($id)
     {
         $id = task::findOrFail($id);
+
         if ($id && $id->completed == false) {
             $id->update(['completed' => true]);
         } elseif ($id->completed == true) {

@@ -19,6 +19,6 @@ class task extends Model
     ];
     public function todolist()
     {
-        return $this->belongsTo(todolist::class);
+        return $this->belongsTo(Todolist::class, 'todolist_id');
     }
 }
