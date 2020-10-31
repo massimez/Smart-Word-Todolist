@@ -15,14 +15,14 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('todolist-id')->nullable()->default(1);
+            $table->unsignedBigInteger('todolist_id')->nullable();
             $table->text('taskname');
             $table->text('description');
             $table->date('duedate');
-            $table->integer('priority')->default(1);
+            $table->integer('priority')->nullable();
             $table->boolean('completed')->default(false);
             $table->timestamps();
-            $table->foreign('todolist-id')->references('id')->on('todolist');
+            $table->foreign('todolist_id')->references('id')->on('todolists')->onDelete('cascade');;
         });
     }
 

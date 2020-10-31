@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\todolist;
+
 use Illuminate\Http\Request;
 
 class TolistController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,9 @@ class TolistController extends Controller
      */
     public function index()
     {
-        $todolist = todolist::all();
-        return $todolist;
+        $todolists = todolist::all();
+
+        return response()->json($todolists, 200);
     }
 
     /**
@@ -39,6 +45,7 @@ class TolistController extends Controller
         $this->validate($request, [
             'todolistname' => 'required|string|max:255|min:3',
         ]);
+
         //Create a new task
         $todolist = new todolist;
         //Assign the task data from the request
@@ -102,10 +109,12 @@ class TolistController extends Controller
     public function destroy($id)
     {
         $id = todolist::findOrFail($id);
-        if ($id)
+        if ($id) {
+
             $id->delete();
-        else
-            return $this->session()->flash('status', 'Error');
-        return response()->json(null);
+        }
+
+
+        return response()->json(null, 204);
     }
 }

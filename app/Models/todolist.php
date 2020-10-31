@@ -9,11 +9,11 @@ class todolist extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user-id',
+        'user_id',
         'todolistname',
     ];
-    public function todolis()
+    public function tasks()
     {
-        return $this->hasMany(task::class);
+        return  $this->hasMany(task::class, 'todolist_id');
     }
 }
