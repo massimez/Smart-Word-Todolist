@@ -35,7 +35,7 @@ class TaskController extends Controller
             'taskname' => 'required|string|max:255|min:3',
             'description' => 'required|string|max:10000|min:5',
             'duedate' => 'required|date',
-            'priority' => 'numeric',
+            'priority' => 'numeric|max:5',
             'todolist_id' => 'numeric',
         ]);
 
@@ -83,7 +83,7 @@ class TaskController extends Controller
 
     public function destroy($tasktodel)
     {
-        $tasktodel = task::findOrFail($tasktodel);
+        $tasktodel = Task::findOrFail($tasktodel);
         if ($tasktodel)
 
             $tasktodel->delete();
@@ -94,7 +94,7 @@ class TaskController extends Controller
 
     public function markdone($id)
     {
-        $id = task::findOrFail($id);
+        $id = Task::findOrFail($id);
 
         if ($id && $id->completed == false) {
             $id->update(['completed' => true]);
